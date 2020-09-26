@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 
 <head>
     <meta charset="UTF-8">
@@ -8,7 +8,38 @@
 </head>
 
 <body>
-
+    <form id="login_form" action="" method="post">
+        <div>
+            账号<input type="text" name="userid">
+        </div>
+        <div>
+            密码<input type="password" name="password">
+        </div>
+        <button type="submit">登录</button>
+    </form>
 </body>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    const $form = $('#login_form')
+    $form.on('submit', (e) => {
+        e.preventDefault()
+        const userid = $form.find('input[name=userid]').val()
+        const password = $form.find('input[name=password]').val()
+        $.ajax({
+            url: './login.html',
+            method: 'POST',
+            contentType: "text/json; charset=utf-8",
+            data: JSON.stringify({ //一定要转化成JSON字符串再传
+                userid: userid,
+                password: password
+            })
+        }).then(() => {
+            alert('登录成功')
+            location.assign('./index.html')
+        }, () => {
+            alert('失败')
+        })
+    })
+</script>
 
 </html>

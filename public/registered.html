@@ -26,13 +26,16 @@
         const userid = $form.find('input[name=userid]').val()
         const password = $form.find('input[name=password]').val()
         $.ajax({
-            url: './registered',
+            url: './registered.html',
             method: 'POST',
             contentType: "text/json; charset=utf-8",
             data: JSON.stringify({ //一定要转化成JSON字符串再传
                 userid: userid,
                 password: password
             })
+        }).then(() => {
+            alert('注册成功')
+            location.href = './login.html'
         })
     })
 </script>
